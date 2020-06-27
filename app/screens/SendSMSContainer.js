@@ -6,22 +6,22 @@ import {ToastAndroid} from 'react-native';
 function SendSMSContainer() {
   // Function to send message
   function startEngine() {
-    SendSMS.send(1, '6672047175', 'resume123456', () => {
+    SendSMS.send(1, '6674832418', 'resume123456', () => {
       ToastAndroid.show('Engine started', ToastAndroid.SHORT);
     });
   }
   function stopEngine() {
-    SendSMS.send(1, '6672047175', 'stop123456', () => {
+    SendSMS.send(1, '6674832418', 'stop123456', () => {
       ToastAndroid.show('Engine stoped', ToastAndroid.SHORT);
     });
   }
   function alarmOn() {
-    SendSMS.send(1, '6672047175', 'arm123456', () => {
+    SendSMS.send(1, '6674832418', 'arm123456', () => {
       ToastAndroid.show('Alarm ON', ToastAndroid.SHORT);
     });
   }
   function alarmOff() {
-    SendSMS.send(1, '6672047175', 'disarm123456', () => {
+    SendSMS.send(1, '6674832418', 'disarm123456', () => {
       ToastAndroid.show('Alarm OFF', ToastAndroid.SHORT);
     });
   }
