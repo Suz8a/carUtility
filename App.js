@@ -1,15 +1,8 @@
-import React from 'react';
-import {SafeAreaView, StyleSheet, Text} from 'react-native';
+import React, {Fragment} from 'react';
+import SendSMSContainer from './app/screens/SendSMSContainer';
 
 function App() {
-  return (
-    <SafeAreaView
-      style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-      <Text>I FUCKING DID IT</Text>
-    </SafeAreaView>
-  );
+  return <SendSMSContainer />;
 }
-
-const styles = StyleSheet.create({});
 
 export default App;
