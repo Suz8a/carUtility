@@ -1,35 +1,77 @@
-import React, {Component, Fragment} from 'react';
-import styles from './scanStyle';
-import {View, StatusBar, Image, Text, TouchableOpacity} from 'react-native';
+import React from 'react';
+import {Text, TouchableOpacity, SafeAreaView, StyleSheet} from 'react-native';
 
-function Scan({sendSMS}) {
-  const desccription =
-    "Use this RN component to send an SMS with a callback (completed/cancelled/error). iOS and Android are both supported.Currently, only user-initiated sending of an SMS is supported. This means you can't use react-native-sms to send an SMS in the background-- this package displays the native SMS view (populated with any recipients/body you want), and gives a callback describing the status of the SMS (completed/cancelled/error)";
-  const imageUri =
-    'https://raw.githubusercontent.com/AboutReact/sampleresource/master/sms.png';
+function Scan({stopEngine, startEngine, alarmOn, alarmOff}) {
   return (
-    <View style={styles.scrollViewStyle}>
-      <Fragment>
-        <StatusBar barStyle="dark-content" />
-        <Image
-          source={{uri: imageUri}}
-          style={{width: 70, height: 70, alignSelf: 'center'}}
-        />
-
-        <Text style={styles.textTitle}>
-          Welcome To React-Native Send, Get and read SMS Tutorial !
-        </Text>
-        <View style={styles.cardView}>
-          <Text numberOfLines={8} style={styles.descText}>
-            {desccription}
-          </Text>
-          <TouchableOpacity onPress={sendSMS} style={styles.buttonTouchable}>
-            <Text style={styles.buttonTextStyle}> Send SMS !</Text>
-          </TouchableOpacity>
-        </View>
-      </Fragment>
-    </View>
+    <SafeAreaView style={styles.container}>
+      <TouchableOpacity style={styles.start} onPress={startEngine}>
+        <Text style={styles.startText}>Start Engine</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.stop} onPress={stopEngine}>
+        <Text style={styles.stopText}>Stop Engine</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.alarmOn} onPress={alarmOn}>
+        <Text style={styles.stopText}>Turn On Alarm</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.alarmOff} onPress={alarmOff}>
+        <Text style={styles.stopText}>Turn Off Alarm</Text>
+      </TouchableOpacity>
+    </SafeAreaView>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  start: {
+    width: '80%',
+    height: '8%',
+    backgroundColor: '#82b74b',
+    alignContent: 'center',
+    justifyContent: 'center',
+    margin: 20,
+    borderRadius: 10,
+  },
+  stop: {
+    width: '80%',
+    height: '8%',
+    backgroundColor: '#c83349',
+    alignContent: 'center',
+    justifyContent: 'center',
+    margin: 20,
+    borderRadius: 10,
+  },
+  alarmOn: {
+    width: '80%',
+    height: '8%',
+    backgroundColor: '#034f84',
+    alignContent: 'center',
+    justifyContent: 'center',
+    margin: 20,
+    borderRadius: 10,
+  },
+  alarmOff: {
+    width: '80%',
+    height: '8%',
+    backgroundColor: 'black',
+    alignContent: 'center',
+    justifyContent: 'center',
+    margin: 20,
+    borderRadius: 10,
+  },
+  stopText: {
+    color: 'white',
+    textAlign: 'center',
+    fontSize: 25,
+  },
+  startText: {
+    color: 'white',
+    textAlign: 'center',
+    fontSize: 25,
+  },
+});
 
 export default Scan;
