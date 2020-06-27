@@ -13,7 +13,7 @@
     "react": "16.11.0",
     "react-native": "0.62.2",
     "react-native-get-sms-android": "^2.1.0",
-    "react-native-sms": "^1.11.0"
+    "react-native-sms-x": "^1.0.7"
   },
   "devDependencies": {
     "@babel/core": "^7.10.3",
