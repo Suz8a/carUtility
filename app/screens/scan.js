@@ -1,19 +1,21 @@
 import React from 'react';
 import {Text, TouchableOpacity, SafeAreaView, StyleSheet} from 'react-native';
 
-function Scan({stopEngine, startEngine, alarmOn, alarmOff}) {
+function Scan({sendCommand}) {
   return (
     <SafeAreaView style={styles.container}>
-      <TouchableOpacity style={styles.start} onPress={startEngine}>
+      <TouchableOpacity style={styles.start} onPress={sendCommand('start')}>
         <Text style={styles.startText}>Start Engine</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.stop} onPress={stopEngine}>
+      <TouchableOpacity style={styles.stop} onPress={sendCommand('stop')}>
         <Text style={styles.stopText}>Stop Engine</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.alarmOn} onPress={alarmOn}>
+      <TouchableOpacity style={styles.alarmOn} onPress={sendCommand('alarmOn')}>
         <Text style={styles.stopText}>Turn On Alarm</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.alarmOff} onPress={alarmOff}>
+      <TouchableOpacity
+        style={styles.alarmOff}
+        onPress={sendCommand('alarmOff')}>
         <Text style={styles.stopText}>Turn Off Alarm</Text>
       </TouchableOpacity>
     </SafeAreaView>

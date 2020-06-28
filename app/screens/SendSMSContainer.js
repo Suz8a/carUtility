@@ -1,39 +1,33 @@
-import React, {Component} from 'react';
+import React from 'react';
 import Scan from './scan';
 import SendSMS from 'react-native-sms-x';
 import {ToastAndroid} from 'react-native';
 
 function SendSMSContainer() {
-  // Function to send message
-  function startEngine() {
-    SendSMS.send(1, '6674832418', 'resume123456', () => {
-      ToastAndroid.show('Engine started', ToastAndroid.SHORT);
-    });
-  }
-  function stopEngine() {
-    SendSMS.send(1, '6674832418', 'stop123456', () => {
-      ToastAndroid.show('Engine stoped', ToastAndroid.SHORT);
-    });
-  }
-  function alarmOn() {
-    SendSMS.send(1, '6674832418', 'arm123456', () => {
-      ToastAndroid.show('Alarm ON', ToastAndroid.SHORT);
-    });
-  }
-  function alarmOff() {
-    SendSMS.send(1, '6674832418', 'disarm123456', () => {
-      ToastAndroid.show('Alarm OFF', ToastAndroid.SHORT);
+  const gpsNumber = '-';
+
+  const commands = {
+    start: 'resume123456',
+    stop: 'stop123456',
+    alarmOn: 'arm123456',
+    alarmOff: 'disarm123456',
+  };
+
+  const commandDescription = {
+    start: 'Engine Started',
+    stop: 'Engine Stopped',
+    alarmOn: 'Alarm On',
+    alarmOff: 'Alarm Off',
+  };
+
+  // Function to send command
+  function sendCommand(keyCommand) {
+    SendSMS.send(1, gpsNumber, commands[keyCommand], () => {
+      ToastAndroid.show(commandDescription[keyCommand], ToastAndroid.SHORT);
     });
   }
 
-  return (
-    <Scan
-      startEngine={startEngine}
-      stopEngine={stopEngine}
-      alarmOn={alarmOn}
-      alarmOff={alarmOff}
-    />
-  );
+  return <Scan sendCommand={sendCommand} />;
 }
 
 export default SendSMSContainer;
