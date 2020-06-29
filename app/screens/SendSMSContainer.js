@@ -3,7 +3,10 @@ import Scan from './scan';
 import SendSMS from 'react-native-sms-x';
 import {ToastAndroid} from 'react-native';
 
+import {request, PERMISSIONS} from 'react-native-permissions';
+
 function SendSMSContainer() {
+  request(PERMISSIONS.ANDROID.SEND_SMS);
   const gpsNumber = '6672047175';
   //6674832418
   const commands = {
@@ -18,6 +21,7 @@ function SendSMSContainer() {
     alarmOn: 'Alarm On',
     alarmOff: 'Alarm Off',
   };
+
   // Function to send message
   function sendCommand(keyCommand) {
     SendSMS.send(1, gpsNumber, commands[keyCommand], () => {
