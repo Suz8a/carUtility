@@ -5,22 +5,14 @@ function Scan({sendCommand}) {
   return (
     <SafeAreaView style={styles.container}>
       <TouchableOpacity
-        style={styles.start}
-        onPress={() => sendCommand('start')}>
-        <Text style={styles.startText}>Start Engine</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.stop} onPress={() => sendCommand('stop')}>
-        <Text style={styles.stopText}>Stop Engine</Text>
+        style={styles.button}
+        onPress={() => sendCommand('engine')}>
+        <Text style={styles.text}>Switch Engine</Text>
       </TouchableOpacity>
       <TouchableOpacity
-        style={styles.alarmOn}
-        onPress={() => sendCommand('alarmOn')}>
-        <Text style={styles.stopText}>Turn On Alarm</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={styles.alarmOff}
-        onPress={() => sendCommand('alarmOff')}>
-        <Text style={styles.stopText}>Turn Off Alarm</Text>
+        style={styles.button}
+        onPress={() => sendCommand('alarm')}>
+        <Text style={styles.text}>Switch Alarm</Text>
       </TouchableOpacity>
     </SafeAreaView>
   );
@@ -32,48 +24,16 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  start: {
-    width: '80%',
-    height: '8%',
+  button: {
+    width: 200,
+    height: 200,
     backgroundColor: '#82b74b',
     alignContent: 'center',
     justifyContent: 'center',
     margin: 20,
-    borderRadius: 10,
+    borderRadius: 200,
   },
-  stop: {
-    width: '80%',
-    height: '8%',
-    backgroundColor: '#c83349',
-    alignContent: 'center',
-    justifyContent: 'center',
-    margin: 20,
-    borderRadius: 10,
-  },
-  alarmOn: {
-    width: '80%',
-    height: '8%',
-    backgroundColor: '#034f84',
-    alignContent: 'center',
-    justifyContent: 'center',
-    margin: 20,
-    borderRadius: 10,
-  },
-  alarmOff: {
-    width: '80%',
-    height: '8%',
-    backgroundColor: 'black',
-    alignContent: 'center',
-    justifyContent: 'center',
-    margin: 20,
-    borderRadius: 10,
-  },
-  stopText: {
-    color: 'white',
-    textAlign: 'center',
-    fontSize: 25,
-  },
-  startText: {
+  text: {
     color: 'white',
     textAlign: 'center',
     fontSize: 25,
