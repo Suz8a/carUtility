@@ -1,13 +1,16 @@
 import React from 'react';
 import {Text, TouchableOpacity, SafeAreaView, StyleSheet} from 'react-native';
+import Icon from 'react-native-vector-icons/Fontisto';
 
 function Scan({sendCommand}) {
+  var powerIconColor = 'gray';
+
   return (
     <SafeAreaView style={styles.container}>
       <TouchableOpacity
         style={styles.button}
         onPress={() => sendCommand('engine')}>
-        <Text style={styles.text}>Switch Engine</Text>
+        <Icon name="power" size={70} color={powerIconColor} />
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.button}
@@ -27,11 +30,21 @@ const styles = StyleSheet.create({
   button: {
     width: 200,
     height: 200,
-    backgroundColor: '#82b74b',
-    alignContent: 'center',
+    backgroundColor: 'white',
     justifyContent: 'center',
+    alignItems: 'center',
     margin: 20,
     borderRadius: 200,
+
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 4,
+    },
+    shadowOpacity: 0.3,
+    shadowRadius: 4.65,
+
+    elevation: 8,
   },
   text: {
     color: 'white',
