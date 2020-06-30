@@ -27,22 +27,32 @@ function SendSMSContainer() {
   async function switchEngine(engineStatus) {
     try {
       await AsyncStorage.setItem('engine', engineStatus);
-    } catch (e) {
-      // saving error
-    }
+    } catch (e) {}
   }
   async function switchAlarm(alarmStatus) {
     try {
       await AsyncStorage.setItem('alarm', alarmStatus);
-    } catch (e) {
-      // saving error
-    }
+    } catch (e) {}
   }
 
   // Function to send message
-  async function sendCommand(keyCommand, switchName) {
+  async function sendCommand(switchName) {
     const engineStatus = await AsyncStorage.getItem('engine');
     const alarmStatus = await AsyncStorage.getItem('alarm');
+    var keyCommand = '';
+
+    if (engineStatus === null && alarmStatus == null) {
+      await AsyncStorage.setItem('engine', 'stop');
+      await AsyncStorage.setItem('alarm', 'alarmOff');
+    }
+
+    switchName === 'engine'
+      ? engineStatus === 'stop'
+        ? (switchEngine('start'), (keyCommand = 'start'))
+        : (switchEngine('stop'), (keyCommand = 'stop'))
+      : alarmStatus === 'alarmOff'
+      ? (switchAlarm('alarmOn'), (keyCommand = 'alarmOn'))
+      : (switchAlarm('alarmOff'), (keyCommand = 'alarmOff'));
 
     SendSMS.send(1, gpsNumber, commands[keyCommand], () => {
       ToastAndroid.show(commandDescription[keyCommand], ToastAndroid.SHORT);
