@@ -1,10 +1,8 @@
 import React from 'react';
-import {Text, TouchableOpacity, SafeAreaView, StyleSheet} from 'react-native';
+import {TouchableOpacity, SafeAreaView, StyleSheet} from 'react-native';
 import Icon from 'react-native-vector-icons/Fontisto';
 
-function Scan({sendCommand}) {
-  var powerIconColor = 'gray';
-
+function Scan({sendCommand, powerIconColor, lockIconColor}) {
   return (
     <SafeAreaView style={styles.container}>
       <TouchableOpacity
@@ -15,7 +13,7 @@ function Scan({sendCommand}) {
       <TouchableOpacity
         style={styles.button}
         onPress={() => sendCommand('alarm')}>
-        <Text style={styles.text}>Switch Alarm</Text>
+        <Icon name="unlocked" size={70} color={lockIconColor} />
       </TouchableOpacity>
     </SafeAreaView>
   );
