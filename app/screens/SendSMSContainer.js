@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import Scan from './scan';
 import SendSMS from 'react-native-sms-x';
 import {ToastAndroid} from 'react-native';
@@ -8,6 +8,27 @@ import AsyncStorage from '@react-native-community/async-storage';
 
 function SendSMSContainer() {
   request(PERMISSIONS.ANDROID.SEND_SMS);
+  const [powerColor, setPowerColor] = useState('green');
+  const [lockColor, setLockColor] = useState('green');
+  const [lockIcon, setLockIcon] = useState('unlocked');
+
+  useEffect(() => {
+    (async () => {
+      var engineStatus = await AsyncStorage.getItem('engine');
+      var alarmStatus = await AsyncStorage.getItem('alarm');
+
+      if (engineStatus === null && alarmStatus === null) {
+        switchEngine('start', 'green');
+        switchAlarm('alarmOff', 'green');
+      }
+
+      setPowerColor(JSON.parse(engineStatus).color.toString());
+      setLockColor(JSON.parse(alarmStatus).color.toString());
+      JSON.parse(alarmStatus).color.toString() === 'green'
+        ? setLockIcon('unlocked')
+        : setLockIcon('locked');
+    })();
+  }, []);
 
   const gpsNumber = '6672047175';
   //6674832418
@@ -50,23 +71,30 @@ function SendSMSContainer() {
 
   // Function to send message
   async function sendCommand(switchName) {
-    var engineStatus = await AsyncStorage.getItem('engine');
-    var alarmStatus = await AsyncStorage.getItem('alarm');
+    const engineStatus = await AsyncStorage.getItem('engine');
+    const alarmStatus = await AsyncStorage.getItem('alarm');
     var keyCommand = '';
 
-    if (engineStatus === null && alarmStatus === null) {
-      debugger;
-      switchEngine('start', 'green');
-      switchAlarm('alarmOff', 'green');
-    }
+    const engineData = JSON.parse(engineStatus);
+    const alarmData = JSON.parse(alarmStatus);
 
     switchName === 'engine'
-      ? engineStatus.status === 'stop'
-        ? (switchEngine('start', 'green'), (keyCommand = 'start'))
-        : (switchEngine('stop', 'gray'), (keyCommand = 'stop'))
-      : engineStatus.status === 'alarmOff'
-      ? (switchAlarm('alarmOn', 'red'), (keyCommand = 'alarmOn'))
-      : (switchAlarm('alarmOff', 'green'), (keyCommand = 'alarmOff'));
+      ? engineData.status === 'stop'
+        ? (switchEngine('start', 'green'),
+          setPowerColor('green'),
+          (keyCommand = 'start'))
+        : (switchEngine('stop', 'gray'),
+          setPowerColor('gray'),
+          (keyCommand = 'stop'))
+      : alarmData.status === 'alarmOff'
+      ? (switchAlarm('alarmOn', 'red'),
+        setLockIcon('locked'),
+        setLockColor('red'),
+        (keyCommand = 'alarmOn'))
+      : (switchAlarm('alarmOff', 'green'),
+        setLockColor('green'),
+        setLockIcon('unlocked'),
+        (keyCommand = 'alarmOff'));
 
     SendSMS.send(1, gpsNumber, commands[keyCommand], () => {
       ToastAndroid.show(commandDescription[keyCommand], ToastAndroid.SHORT);
@@ -75,15 +103,12 @@ function SendSMSContainer() {
     console.log(alarmStatus);
   }
 
-  async function getPowerColor() {
-    return await AsyncStorage.getItem('engine').color;
-  }
-
   return (
     <Scan
       sendCommand={sendCommand}
-      powerIconColor="green"
-      lockIconColor="green"
+      lockIcon={lockIcon}
+      powerColor={powerColor}
+      lockIconColor={lockColor}
     />
   );
 }

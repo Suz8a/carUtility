@@ -2,18 +2,18 @@ import React from 'react';
 import {TouchableOpacity, SafeAreaView, StyleSheet} from 'react-native';
 import Icon from 'react-native-vector-icons/Fontisto';
 
-function Scan({sendCommand, powerIconColor, lockIconColor}) {
+function Scan({sendCommand, lockIcon, powerColor, lockIconColor}) {
   return (
     <SafeAreaView style={styles.container}>
       <TouchableOpacity
         style={styles.button}
         onPress={() => sendCommand('engine')}>
-        <Icon name="power" size={70} color={powerIconColor} />
+        <Icon name="power" size={70} color={powerColor} />
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.button}
         onPress={() => sendCommand('alarm')}>
-        <Icon name="unlocked" size={70} color={lockIconColor} />
+        <Icon name={lockIcon} size={70} color={lockIconColor} />
       </TouchableOpacity>
     </SafeAreaView>
   );
