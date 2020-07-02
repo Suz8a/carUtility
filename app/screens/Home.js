@@ -30,8 +30,8 @@ function Home() {
     })();
   }, []);
 
-  const gpsNumber = '6672047175';
-  //6674832418
+  const gpsNumber = '-';
+
   const commands = {
     start: 'resume123456',
     stop: 'stop123456',
