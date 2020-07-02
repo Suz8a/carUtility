@@ -83,8 +83,8 @@ function Home() {
         ? (switchEngine('start', 'green'),
           setPowerColor('green'),
           (keyCommand = 'start'))
-        : (switchEngine('stop', 'gray'),
-          setPowerColor('gray'),
+        : (switchEngine('stop', 'red'),
+          setPowerColor('red'),
           (keyCommand = 'stop'))
       : alarmData.status === 'alarmOff'
       ? (switchAlarm('alarmOn', 'red'),
